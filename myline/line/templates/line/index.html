@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <ul id="list">
+
+    </ul>
+
+</body>
+<script>
+    window.onload = () => {
+        websiteList()
+    }
+
+        function websiteList() {
+        fetch("/api/v1/line/website/")
+            .then(response => response.json())
+            .then(data => {
+                const ulNode = document.getElementById("list");
+                data.forEach(website => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.textContent = website.url;
+                    link.setAttribute('href', `http://127.0.0.1:8000/line/website/${website.id}/images`)
+                    listItem.appendChild(link)
+                    ulNode.appendChild(listItem)
+                });
+            })
+            .catch(error => console.error('Error fetching blogs:', error));
+    }
+
+</script>
+
+</html>

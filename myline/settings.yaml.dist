@@ -1,0 +1,11 @@
+client_config_backend: ''
+client_config:
+  client_id: ""
+  client_secret: ""
+
+save_credentials: True
+save_credentials_backend: ''
+save_credentials_file: ''
+
+oauth_scope:
+  - ""

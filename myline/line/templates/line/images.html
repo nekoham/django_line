@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1 id="website"></h1>
+
+    <ul id="list">
+
+    </ul>
+
+</body>
+<script>
+    window.onload = () => {
+        // websiteDetail()
+        imageList()
+    }
+
+    function imageList() {
+        fetch(`/api/v1/line/website/${window.location.pathname.split("/")[3]}/images/`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                let website = document.getElementById('website')
+                website.textContent = data[0].source_detail.url
+
+                const ulNode = document.getElementById("list");
+                data.forEach(image => {
+                    const listItem = document.createElement('li');
+                    const img = document.createElement('img');
+                    img.setAttribute('src', image.path)
+                    listItem.appendChild(img)
+                    ulNode.appendChild(listItem)
+                });
+            })
+            .catch(error => console.error('Error fetching websites:', error));
+    }
+    
+    function websiteDetail() {
+        fetch(`/api/v1/line/website/${window.location.pathname.split("/")[3]}/`)
+            .then(response => response.json())
+            .then(data => {
+                let website = document.getElementById('website')
+                website.textContent = data.url
+            })
+            .catch(error => console.error('Error fetching websites:', error));
+        }
+</script>
+
+</html>

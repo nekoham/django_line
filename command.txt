@@ -1,0 +1,4 @@
+cd myline
+py manage.py runserver
+
+./ngrok http 8000 --domain magical-sponge-recently.ngrok-free.app   
